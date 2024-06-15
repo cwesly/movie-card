@@ -1,12 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../components/input";
-import { InputType } from "../../types";
+import { InputType, TypeError } from "../../types";
 import Button from "../../components/button";
 import IconNetflix from "../../components/iconNetflex";
+import ErrorForm from "../../components/errorForm";
 
 const Login = () => {
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputPassword, setInputPassword] = useState("");
+  const [inputEmail, setInputEmail] = useState<string>("");
+  const [inputPassword, setInputPassword] = useState<string>("");
+  const [error, setError] = useState<TypeError>({
+    email: "Please enter a valid email or phone number.",
+    password: "Your password must contain between 4 and 60 characters.",
+  });
+
+  const validatePassword = () => {
+    if (inputPassword.length >= 4 && inputPassword.length <= 60) {
+      setError({
+        ...error,
+        password: "",
+      });
+      return;
+    }
+    setError({
+      ...error,
+      password: "Your password must contain between 4 and 60 characters.",
+    });
+  };
+
+  const validateEmail = () => {
+    const regex = /^[\w\-.]+@([\w-]+\.)+[\w-]{2,}$/;
+    if (regex.test(inputEmail)) {
+      setError({
+        ...error,
+        email: "",
+      });
+      return;
+    }
+    setError({
+      ...error,
+      email: "Please enter a valid email or phone number.",
+    });
+  };
+
+  useEffect(() => {
+    validateEmail();
+  }, [inputEmail]);
+
+  useEffect(() => {
+    validatePassword();
+  }, [inputPassword]);
+
+  const isValid = Boolean(error.email) || Boolean(error.password);
+
+  console.log(isValid);
+
   return (
     <div className="@apply flex justify-center bg-black/50 h-screen items-center relative">
       <img
@@ -24,13 +71,19 @@ const Login = () => {
           typeInput={InputType.Email}
           placeholder="Email or phone number"
         />
+        {error.email && <ErrorForm>{error.email}</ErrorForm>}
         <Input
           setValue={setInputPassword}
           value={inputPassword}
           typeInput={InputType.Password}
           placeholder="Password"
         />
-        <Button color="bg-[#e50914]" handleSubmit={() => alert("oi")}>
+        {error.password && <ErrorForm>{error.password}</ErrorForm>}
+        <Button
+          color="bg-[#e50914] disabled:bg-gray-600 disabled:cursor-not-allowed"
+          handleSubmit={() => alert("oi")}
+          isDisable={isValid}
+        >
           Sing In
         </Button>
         <div className="flex justify-center">
@@ -45,13 +98,12 @@ const Login = () => {
           <input type="checkbox" />
           <p>Remember me</p>
         </div>
-        <p className="text-gray-300/80">
+        <p className="flex gap-2 text-gray-300/80">
           New to Netflix?
           <a
             href="https://www.netflix.com/ca/"
             className="text-blue-600 hover:text-blue-800 hover:underline"
           >
-            {" "}
             Sign up now.
           </a>
         </p>

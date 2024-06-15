@@ -16,7 +16,7 @@ function Button({
   return (
     <button
       disabled={isDisable}
-      className={` py-2 text-white rounded ${className} ${color}`}
+      className={` py-2 text-white rounded ${className} ${color} `}
       onClick={handleSubmit}
     >
       {children}
