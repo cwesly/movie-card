@@ -20,8 +20,8 @@ const Login = () => {
   });
 
   const user = {
-    email: "j@r.com",
-    password: "1234",
+    email: "test@test.com",
+    password: "test",
   };
 
   const validatePassword = () => {
@@ -81,14 +81,14 @@ const Login = () => {
   };
 
   return (
-    <div className="@apply flex justify-center bg-black/50 h-screen items-center relative">
+    <div className="flex justify-center bg-black/50 h-screen items-center relative">
       <img
-        className="@apply h-full w-full absolute z-[-1]"
+        className="h-full w-full absolute z-[-1]"
         src="https://assets.nflxext.com/ffe/siteui/vlv3/cacfadb7-c017-4318-85e4-7f46da1cae88/f2e98033-57b5-4cf9-993d-ee774904fc5e/CA-en-20240603-popsignuptwoweeks-perspective_alpha_website_small.jpg"
       />
       <IconNetflix size="h-10" className="absolute top-7 left-8 " />
-      <form className="@apply flex flex-col justify-center bg-black/75 px-16 pb-24 rounded-3.5 pt-11 gap-4 w-[28.125rem] text-white">
-        <h1 className="@apply text-[white] font-semibold text-[1.9375rem] pb-2">
+      <form className="flex flex-col justify-center bg-black/75 px-16 pb-24 rounded-3.5 pt-11 gap-4 w-[28.125rem] text-white">
+        <h1 className="text-white font-semibold text-3xl font-bold pb-2">
           Sing In
         </h1>
         <Input
@@ -154,7 +154,7 @@ const Login = () => {
           New to Netflix?
           <a
             href="https://www.netflix.com/ca/"
-            className="text-blue-600 hover:text-blue-800 hover:underline"
+            className="text-blue-600 hover:text-blue-800 font-medium hover:underline"
           >
             Sign up now.
           </a>
