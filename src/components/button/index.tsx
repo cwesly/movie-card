@@ -16,7 +16,7 @@ function Button({
   return (
     <button
       disabled={isDisable}
-      className={` py-2 text-white rounded font-medium ${className} ${color} `}
+      className={` py-2 text-white rounded font-medium hover:brightness-75 transition-all duration-300 ${className} ${color} `}
       onClick={handleSubmit}
     >
       {children}

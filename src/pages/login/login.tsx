@@ -5,19 +5,26 @@ import Button from "../../components/button";
 import IconNetflix from "../../components/iconNetflex";
 import ErrorForm from "../../components/errorForm";
 import { useNavigate } from "react-router-dom";
+import Checkbox from "../../components/checkBox";
 
 const Login = () => {
   const [inputEmail, setInputEmail] = useState<string>("");
+
   const [inputPassword, setInputPassword] = useState<string>("");
-  const navigate = useNavigate();
+
+  const [checkBox, setCheckBox] = useState<boolean>(false);
+
   const [error, setError] = useState<TypeError>({
     email: "Please enter a valid email or phone number.",
     password: "Your password must contain between 4 and 60 characters.",
   });
+
   const [isTouched, setIsTouched] = useState<TypeIsTouched>({
     email: false,
     password: false,
   });
+
+  const navigate = useNavigate();
 
   const user = {
     email: "test@test.com",
@@ -88,9 +95,7 @@ const Login = () => {
       />
       <IconNetflix size="h-10" className="absolute top-7 left-8 " />
       <form className="flex flex-col justify-center bg-black/75 px-16 pb-24 rounded-3.5 pt-11 gap-4 w-[28.125rem] text-white">
-        <h1 className="text-white font-semibold text-3xl font-bold pb-2">
-          Sing In
-        </h1>
+        <h1 className="text-white text-3xl font-bold pb-2">Sing In</h1>
         <Input
           className={isTouched.email && error.email ? "border-red-600" : ""}
           setValue={setInputEmail}
@@ -140,21 +145,23 @@ const Login = () => {
         </Button>
         <div className="flex justify-center">
           <a
-            className=" text-white hover:text-zinc-400 hover:underline"
+            className=" text-white transition-all hover:text-gray-400 hover:underline"
             href="https://www.netflix.com/ca/LoginHelp"
           >
             Forgot password?
           </a>
-        </div>
-        <div className="flex gap-3">
-          <input type="checkbox" />
-          <p>Remember me</p>
-        </div>
+        </div>  
+          <Checkbox
+            value={checkBox}
+            setValue={setCheckBox}
+            label="Remember me"
+            id="checkRemember"
+          />
         <p className="flex gap-2 text-gray-300/80">
           New to Netflix?
           <a
             href="https://www.netflix.com/ca/"
-            className="text-blue-600 hover:text-blue-800 font-medium hover:underline"
+            className="text-blue-600 hover:brightness-75 transition-all font-medium hover:underline"
           >
             Sign up now.
           </a>
