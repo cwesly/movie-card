@@ -7,3 +7,8 @@ export type TypeError = {
   email: string;
   password: string;
 };
+
+export type TypeIsTouched = {
+  email: boolean;
+  password: boolean;
+};
